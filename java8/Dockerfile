@@ -5,6 +5,9 @@ ENV JAVA_BUILD_NUMBER 25
 
 ENV JAVA_VERSION 1.8.0_$JAVA_UPDATE_NUMBER
 
+RUN groupadd java && useradd -g java java && \
+    mkdir /home/java && chown -R java:java /home/java
+
 RUN apt-get update && \
     apt-get install -y curl tar unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -14,7 +17,7 @@ RUN (curl -skLb "oraclelicense=accept-securebackup-cookie" http://download.oracl
 	mv /jdk$JAVA_VERSION/lib/tools.jar /jre$JAVA_VERSION/lib/ext && \
 	rm -Rf /jdk$JAVA_VERSION
 
-RUN groupadd java && useradd -s /sbin/nologin -g java java
+USER java
 
 ENV JAVA_HOME /jre$JAVA_VERSION
 ENV PATH $PATH:$JAVA_HOME/bin
