@@ -1,7 +1,7 @@
 FROM dgageot/busybox-ubuntu
 
-ENV MINOR_VERSION 72
-ENV BUILD_NUMBER b14
+ENV MINOR_VERSION 79
+ENV BUILD_NUMBER b15
 
 # Need curl because built-in wget does not support https
 RUN (wget -O - http://www.magicermine.com/demos/curl/curl/curl-7.30.0.ermine.tar.bz2 | bunzip2 -c - | tar xf -) \
